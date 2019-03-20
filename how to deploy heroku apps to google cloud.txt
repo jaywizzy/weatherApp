@@ -1,0 +1,48 @@
+-STEPS
+	1. Install SDK
+	2. Create New Project
+	3. Create Local Files
+	4. Depoy and Test Online
+
+-Install SDK
+	1. Go to: https://cloud.google.com/sdk/install/
+	2. Connect to your google cloud account, go to: cloud.google.com/free/
+
+-Create New Project  and save the id.
+
+-Create an app.yaml file in your project root and add the following:
+	
+	runtime: python27
+	api_version: 1
+	threadsafe: true
+
+	handlers:
+	- url: /static
+  	  static_dir: static
+	- url: /.*
+  	  script: main.app
+  
+	libraries:
+  	  - name: ssl
+      version: latest
+
+-Create an appengine_config.py file in your project root and add the following:
+
+	from google.appengine.ext import vendor
+
+	# Add any libraries installed in the "lib" folder.
+	vendor.add('lib')
+
+-Replicate the library’s dependencies in lib folder. run:
+
+	pip install -t lib -r requirements.txt
+
+-Deploy on Google Cloud using your save project ID
+	gcloud auth application-default login
+	gcloud config set project <PROJECT_ID>
+	gcloud init
+	gcloud app deploy app.yaml
+
+-FINITO------ TADA!!! 
+
+👏👏👏👏👏
